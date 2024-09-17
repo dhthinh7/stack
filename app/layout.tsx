@@ -1,10 +1,12 @@
+import { ReactNode } from 'react';
 import { ClerkProvider } from '@clerk/nextjs'
 
 import type { Metadata } from "next";
-import { Inter, Space_Grotesk } from "next/font/google"
+import { Inter } from "next/font/google"
 
 import localFont from "next/font/local";
 import "./globals.css";
+import { ThemProvider } from '@/context/ThemeProvider';
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -40,24 +42,27 @@ export const metadata: Metadata = {
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: ReactNode;
 }>) {
   return (
-    <ClerkProvider
-      appearance={{
-        elements: {
-          formButtonPrimary: 'primary-gradient',
-          footerActionLink: 'primary-text-gradient hover:text-primary-500'
-        }
-      }}>
-      <html lang="en">
-        <body
-          className={`${geistSans.variable} ${geistMono.variable} ${inter.variable} ${spaceGrotesk.variable} antialiased`}
+    <html lang="en">
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} ${inter.variable} ${spaceGrotesk.variable} antialiased`}
+      >
+        <ClerkProvider
+          appearance={{
+            elements: {
+              formButtonPrimary: 'primary-gradient',
+              footerActionLink: 'primary-text-gradient hover:text-primary-500'
+            }
+          }}
+          signInFallbackRedirectUrl={'/'}
         >
-          <h1 className='h1-bold'>abc</h1>
-          {children}
-        </body>
-      </html>
-    </ClerkProvider>
+          <ThemProvider>
+            {children}
+          </ThemProvider>
+        </ClerkProvider>
+      </body>
+    </html>
   );
 }

@@ -1,7 +1,7 @@
 {
-  "extends": ["next/core-web-vitals", "next/typescript", "standard", "plugin:tailwindcss/recommended", "prettier"],
+  "extends": ["next/core-web-vitals", "next/typescript", "eslint:recommended"],
   "rules": {
-    "max-len": [2, 250],
+    // "max-len": [2, 250],
     "no-multiple-empty-lines": [
       "error",
       {
@@ -10,5 +10,6 @@
       }
     ],
     "object-curly-newline": 0
-	}
+	},
+  "parser": "@typescript-eslint/parser"
 }
