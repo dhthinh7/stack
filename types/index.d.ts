@@ -54,3 +54,24 @@ export interface BadgeCounts {
 }
 
 export type BadgeCriteriaType = keyof typeof BADGE_CRITERIA;
+
+export type TFilters = {
+  name: string
+  value: string
+}
+
+export type TTag = {
+  _id: number
+  name: string
+}
+
+export type TQuestion = {
+  _id: number
+  title: string
+  tags: TTag[]
+  author: string
+  upvotes: number
+  views: number
+  answers: number
+  createAt: string
+}

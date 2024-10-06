@@ -10,7 +10,7 @@ type TLocalSearchBar = {
   placeHolder: string
   otherClasses?: string
 }
-const LocalSearchBar = ({ route, iconPosition, imgSrc, placeHolder, otherClasses }: TLocalSearchBar) => {
+const LocalSearchBar = ({ iconPosition, imgSrc, placeHolder, otherClasses }: TLocalSearchBar) => {
   return <div className={cn('background-light800_darkgradient flex min-h-[56px] grow items-center gap-4 rounded-[10px] px-4', otherClasses)}>
     {iconPosition === 'left' && <Image src={imgSrc} alt="search icon" width={24} height={24} className="cursor-pointer" />}
     <Input
