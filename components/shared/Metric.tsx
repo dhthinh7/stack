@@ -32,7 +32,7 @@ const Metric = ({
       />
 
       <p className={`${textStyles} flex items-center gap-1`}>
-        {value}
+        <span>{value}</span>
 
         <span className={`small-regular line-clamp-1 ${isAuthor ? 'max-sm:hidden' : ''}`}>
           {title}
@@ -43,7 +43,7 @@ const Metric = ({
 
   if (href) {
     return (
-      <Link href={href} className="flex-center  gap-1">
+      <Link href={href} className="flex-center items-center gap-1">
         {metricContent}
       </Link>
     )

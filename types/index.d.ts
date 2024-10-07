@@ -65,13 +65,18 @@ export type TTag = {
   name: string
 }
 
+export type TAuthor = {
+  _id: number
+  name: string
+}
+
 export type TQuestion = {
   _id: number
   title: string
   tags: TTag[]
-  author: string
+  author: TAuthor
   upvotes: number
   views: number
   answers: number
-  createAt: string
+  createAt: Date
 }

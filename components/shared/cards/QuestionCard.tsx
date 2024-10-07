@@ -3,7 +3,7 @@ import Link from "next/link";
 import React from "react";
 import RenderTag from "../RenderTag";
 import Metric from "../Metric";
-import { formatAndDivideNumber } from "@/lib/utils";
+import { formatAndDivideNumber, getTimestamp } from "@/lib/utils";
 
 type TQuestionCardProp = {
   question: TQuestion
@@ -12,7 +12,7 @@ const QuestionCard = ({ question }: TQuestionCardProp) => {
   return <div className="card-wrapper rounded-[10px] p-9 sm:px-11">
     <div className="flex flex-col-reverse items-start justify-between gap-5 sm:flex-row">
       <div>
-        <span className="subtle-regular text-dark400_light700_line">{question.createAt}</span>
+        <span className="subtle-regular text-dark400_light700 line-clamp-1 flex sm:hidden">{getTimestamp(question.createAt)}</span>
         <Link href={`/question/${question._id}`}>
           <h3 className="sm:h3-semibold base-semibold text-dark200_light900 line-clamp-1">
             {question.title}
@@ -27,7 +27,15 @@ const QuestionCard = ({ question }: TQuestionCardProp) => {
     </div>
 
     <div className="flex-between mt-6 w-full flex-wrap gap-3">
-      <div>Author</div>
+      <Metric
+        imgUrl="/assets/icons/avatar.svg"
+        alt="user"
+        value={question.author.name}
+        title={` - asked 1 hours`}
+        href={`/profile/${question.author._id}`}
+        isAuthor
+        textStyles="body-medium text-dark400_light700"
+      />
       <div className="flex items-center gap-3 max-sm:flex-wrap max-sm:justify-start">
         <Metric
           imgUrl="/assets/icons/like.svg"

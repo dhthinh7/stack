@@ -156,7 +156,7 @@
   }
 
   .small-regular {
-    @apply text-[12px] font-normal leading-[15.6px];
+    @apply text-[12px] font-normal;
   }
 
   .small-medium {
@@ -168,11 +168,11 @@
   }
 
   .subtle-medium {
-    @apply text-[10px] font-medium leading-[13px] !important;
+    @apply text-[12px] font-medium leading-[13px] !important;
   }
 
   .subtle-regular {
-    @apply text-[10px] font-normal leading-[13px];
+    @apply text-[12px] font-normal leading-[13px];
   }
 
   .placeholder {
