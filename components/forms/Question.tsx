@@ -12,6 +12,7 @@ import { Editor } from '@tinymce/tinymce-react';
 import { useTheme } from "@/context/ThemeProvider";
 import { Badge } from "../ui/badge";
 import Image from "next/image";
+import { createQuestion } from "@/lib/actions/question.action";
 
 const Question = () => {
   const editorRef = useRef(null);
@@ -29,8 +30,16 @@ const Question = () => {
     },
   })
 
-  const onSubmit = useCallback((value: z.infer<typeof QuestionsSchema>) => {
+  const onSubmit = useCallback(async (value: z.infer<typeof QuestionsSchema>) => {
     console.log(value);
+    setIsSubmitting(true)
+    try {
+      await createQuestion(value)
+    } catch (error) {
+      //
+    } finally {
+      setIsSubmitting(false)
+    }
   }, [])
 
   const handleInputKeyDown = (e: React.KeyboardEvent<HTMLInputElement>, field: ControllerRenderProps<{
@@ -112,8 +121,8 @@ const Question = () => {
                 init={{
                   height: 350,
                   menubar: true,
-                  plugins: 'table advlist lists image media anchor link autoresize',
-                  toolbar: 'undo redo | font | blocks bold forecolor backcolor | bullist numlist | link image media anchor | table | code',
+                  plugins: 'table advlist lists image media anchor link autoresize fullscreen',
+                  toolbar: 'undo redo | font | blocks bold forecolor backcolor | bullist numlist | link image media anchor | table | code | fullscreen',
                   content_style: 'body { font-family:Inter; font-size:16px }',
                   skin: mode === 'dark' ? 'oxide-dark' : 'oxide',
                   content_css: mode === 'dark' ? 'dark' : 'light',
