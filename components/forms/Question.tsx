@@ -13,10 +13,17 @@ import { useTheme } from "@/context/ThemeProvider";
 import { Badge } from "../ui/badge";
 import Image from "next/image";
 import { createQuestion } from "@/lib/actions/question.action";
+import { useRouter } from "next/navigation";
 
-const Question = () => {
+interface IQuestionProps {
+  userId: string
+}
+
+const Question = ({ userId }: IQuestionProps) => {
   const editorRef = useRef(null);
   const { mode } = useTheme();
+  const router = useRouter()
+
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [type, setType] = useState<'Edit' | 'Create'>('Create')
 
@@ -31,16 +38,25 @@ const Question = () => {
   })
 
   const onSubmit = useCallback(async (value: z.infer<typeof QuestionsSchema>) => {
-    console.log(value);
     setIsSubmitting(true)
     try {
-      await createQuestion(value)
+      const response = await createQuestion({
+        title: value.title,
+        content: value.explanation,
+        tags: value.tags,
+        author: userId,
+        path: "/"
+      })
+
+      console.log('response', response);
+
+      router.push('/')
     } catch (error) {
       //
     } finally {
       setIsSubmitting(false)
     }
-  }, [])
+  }, [router, userId])
 
   const handleInputKeyDown = (e: React.KeyboardEvent<HTMLInputElement>, field: ControllerRenderProps<{
     title: string;
